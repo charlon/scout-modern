@@ -1,12 +1,34 @@
 import { createApp } from 'vue'
-import App from './app.vue'
-import router from './router' 
+import App from './app.vue';
+import router from './router';
+import store from './store';
 
-// bootstrap 4 (standalone)
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+import VueMq from 'vue3-mq';
 
-// tailwind
-// import './index.css'
+// bootstrap js
+import 'bootstrap';
 
-createApp(App).use(router).mount('#app')
+// custom bootstrap theming
+import './css/custom.scss';
+
+const app = createApp(App);
+
+// MARK: google analytics data stream measurement_id
+const gaCode = document.body.getAttribute('google-analytics');
+const debugMode = document.body.getAttribute('django-debug');
+
+app.config.productionTip = false;
+
+// vue-mq (media queries)
+app.use(VueMq, {
+  breakpoints: {
+    // breakpoints == min-widths of next size
+    mobile: 768, // tablet begins 768px
+    tablet: 992, // desktop begins 992px
+    desktop: Infinity,
+  },
+});
+app.use(router);
+app.use(store);
+
+app.mount("#app");
