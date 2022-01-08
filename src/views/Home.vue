@@ -19,11 +19,9 @@
       <div class="p-3">
         <h3 class="h6 text-uppercase text-muted">food spaces nearby</h3>
         <ul class="list-group mb-2">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">Cafe<br>Mary Gates Espresso<br>0.05mi, Mary Gates Hall (MGH)</li>
+          <li class="list-group-item">Cafe<br>Starbucks Coffee<br>0.13mi, Suzzallo Library(SUZ)</li>
+          <li class="list-group-item">Cafe<br>Microsoft Cafe<br>0.13mi, Computer Science and Engineering Building 2 (CSE2)</li>
         </ul>
         <div class="text-end"><a :href="'/' + $route.params.campus + '/food'">more food spaces...</a></div>
       </div>
@@ -31,11 +29,9 @@
       <div class="p-3">
         <h3 class="h6 text-uppercase text-muted">study spaces nearby</h3>
         <ul class="list-group mb-2">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">Study Room<br>Mary Gates Hall Commons (MGH 135)<br>0.08mi, Mary Gates Hall (MGH)</li>
+          <li class="list-group-item">Study Room<br>Study Room 131B<br>0.21mi, Odegaard Undergraduate Library (OUGL)</li>
+          <li class="list-group-item">Computer Lab<br>Alder 105<br>0.32mi, Alder Hall(ALD)</li>
         </ul>
         <div class="text-end"><a :href="'/' + $route.params.campus + '/study'">more study spaces...</a></div>
       </div>
@@ -43,11 +39,11 @@
       <div class="p-3">
         <h3 class="h6 text-uppercase text-muted">tech spaces nearby</h3>
         <ul class="list-group mb-2">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
+          <li class="list-group-item">Tech Loan<br>Student Technology Loan Program<br>0.12mi, Kane Hall (KNE)</li>
+          <li class="list-group-item">Makerspace<br>The Mill<br>0.45mi, McCarty Hall</li>
+          <li class="list-group-item">Makerspace<br>Area 01<br>0.45mi, Maple Hall</li>
+          <li class="list-group-item">Makerspace<br>The 8<br>0.45mi, McMahon Hall</li>
+          <li class="list-group-item">Makerspace<br>Collaboratory<br>4.5mi, Discovery Hall, Bothell</li>
         </ul>
         <div class="text-end"><a :href="'/' + $route.params.campus + '/tech'">more tech spaces...</a></div>
       </div>
