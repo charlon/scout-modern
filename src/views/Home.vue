@@ -11,12 +11,13 @@
 
       <div class="d-flex bg-info mb-3 p-3" style="height:300px;">
         <div class="align-self-end">
-          <h2>{{ $route.params.campus }} campus</h2>
+          <h2>{{ campus }} campus</h2>          
           <p>Discover campus options for food, study spaces, and tech items.</p>
         </div>
       </div>
 
       <div class="p-3">
+        {{ foodSpotList }}
         <h3 class="h6 text-uppercase text-muted">food spaces nearby</h3>
         <ul class="list-group mb-2">
           <li class="list-group-item">Cafe<br>Mary Gates Espresso<br>0.05mi, Mary Gates Hall (MGH)</li>
@@ -27,6 +28,7 @@
       </div>
 
       <div class="p-3">
+        {{ studySpotList }}
         <h3 class="h6 text-uppercase text-muted">study spaces nearby</h3>
         <ul class="list-group mb-2">
           <li class="list-group-item">Study Room<br>Mary Gates Hall Commons (MGH 135)<br>0.08mi, Mary Gates Hall (MGH)</li>
@@ -37,6 +39,7 @@
       </div>
 
       <div class="p-3">
+        {{ techSpotList }}
         <h3 class="h6 text-uppercase text-muted">tech spaces nearby</h3>
         <ul class="list-group mb-2">
           <li class="list-group-item">Tech Loan<br>Student Technology Loan Program<br>0.12mi, Kane Hall (KNE)</li>
@@ -58,7 +61,10 @@
 </template>
 
 <script>
+import db from '../firebase';
+import { collection, query, where, limit, doc, getDoc, getDocs} from "firebase/firestore"; 
 import Layout from '../layout.vue';
+import { routeLocationKey } from 'vue-router';
 
 export default {
   components: {
@@ -67,9 +73,47 @@ export default {
   data() {
     return {
       pageTitle: 'Discover',
+      foodSpotList: [],
+      studySpotList: [],
+      techSpotList: [],
+      categories: ["food", "study", "tech"],
+      campus: this.$route.params.campus,
     };
   },
-  methods: {},
+  methods: {
+
+    async getSpots() {      
+      if (this.$route.params.campus) {
+        // filter spots for each category
+        this.categories.forEach(category => this.getFilteredSpots(category));
+      }
+    },
+    async getFilteredSpots(category) {
+      
+      // get spots by campus
+      let q = query(collection(db, "spots"), where("campus", "==", this.campus));
+      // filter spots by category
+      q = query(q, where("category", "array-contains", category));
+      const snapshot = await getDocs(q);
+      snapshot.forEach((doc) => {
+        // update doc snapshot for each category
+        if (category == "food") {
+          return this.foodSpotList.push({ id: doc.id, ...doc.data() });
+        }
+        else if (category == "study"){
+          return this.studySpotList.push({ id: doc.id, ...doc.data() });
+        }
+        else if (category == "tech"){
+          return this.techSpotList.push({ id: doc.id, ...doc.data() });
+        }
+
+      });
+    },
+  
+  },
+  mounted() {
+    this.getSpots();
+  }
 };
 </script>
 
