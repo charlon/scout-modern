@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-// page components
+// view components
 import Home from '../views/home.vue';
 import List from '../views/list.vue';
 import Detail from '../views/detail.vue';
@@ -14,24 +14,20 @@ const routes = [
   },
   {
     path: "/:campus",
-    name: "Home",
     component: Home
   },
   {
     path: "/:campus/:type",
-    name: "List",
     component: List,
     pathToRegexpOptions: { strict: true }
   },
   {
     path: "/:campus/:type/:id",
-    name: "Detail",
     component: Detail,
     pathToRegexpOptions: { strict: true }
   },
   {
     path: "/:campus/:type/filter",
-    name: "Filter",
     component: Filter,
     pathToRegexpOptions: { strict: true }
   },

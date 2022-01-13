@@ -17,12 +17,12 @@
       </div>
 
       <div class="p-3">
-        <div class="code">{{ campus }}</div>
+        <p class="text-muted">{{ campus }}</p>
         <div>latitude: {{ campus.latitude }}, longitude: {{ campus.longitude }} </div>
       </div>
 
       <div class="p-3">
-        {{ foodSpotList }}
+        <p class="text-muted">{{ foodSpotList }}</p>
         <h3 class="h6 text-uppercase text-muted">food spaces nearby</h3>
         <ul class="list-group mb-2">
 
@@ -37,7 +37,7 @@
       </div>
 
       <div class="p-3">
-        {{ studySpotList }}
+        <p class="text-muted">{{ studySpotList }}</p>
         <h3 class="h6 text-uppercase text-muted">study spaces nearby</h3>
         <ul class="list-group mb-2">
           <li v-for="(spot, index) in studySpotList" :key="index" class="list-group-item">
@@ -50,7 +50,7 @@
       </div>
 
       <div class="p-3">
-        {{ techSpotList }}
+        <p class="text-muted">{{ techSpotList }}</p>
         <h3 class="h6 text-uppercase text-muted">tech spaces nearby</h3>
         <ul class="list-group mb-2">
           <li v-for="(spot, index) in techSpotList" :key="index" class="list-group-item">
