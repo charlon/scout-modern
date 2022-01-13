@@ -11,16 +11,14 @@
 
       <div class="d-flex bg-info mb-3 p-3" style="height:300px;">
         <div class="align-self-end">
-          <h2>{{ campus }} campus</h2>          
+          <h2>{{ campus.name }} campus</h2>          
           <p>Discover campus options for food, study spaces, and tech items.</p>
         </div>
       </div>
 
       <div class="p-3">
-        {{ campusCenter }}
-        <div v-for="(blah, index) in campusCenter" :key="index">
-          {{ blah.campus }} center: {{blah.latitude}}, {{blah.longitude}}
-        </div>
+        <div class="code">{{ campus }}</div>
+        <div>latitude: {{ campus.latitude }}, longitude: {{ campus.longitude }} </div>
       </div>
 
       <div class="p-3">
@@ -85,16 +83,17 @@ export default {
   data() {
     return {
       pageTitle: 'Discover',
-      campusCenter: [
-        {"campus": "seattle", "latitude": "47.653811", "longitude": "-122.307815"},
-        {"campus": "bothell", "latitude": "47.75907121", "longitude": "-122.19103843"},
-        {"campus": "tacoma", "latitude": "47.24458187", "longitude": "-122.43763134"}
+      locations: [
+        {"name": "seattle", "latitude": "47.653811", "longitude": "-122.307815"},
+        {"name": "bothell", "latitude": "47.75907121", "longitude": "-122.19103843"},
+        {"name": "tacoma", "latitude": "47.24458187", "longitude": "-122.43763134"}
       ],
+      campus: {},
       foodSpotList: [],
       studySpotList: [],
       techSpotList: [],
       categories: ["food", "study", "tech"],
-      campus: this.$route.params.campus,
+      //campus: this.$route.params.campus,
     };
   },
   methods: {
@@ -108,7 +107,7 @@ export default {
     async getFilteredSpots(category) {
       
       // get spots by campus
-      let q = query(collection(db, "spots"), where("campus", "==", this.campus));
+      let q = query(collection(db, "spots"), where("campus", "==", this.$route.params.campus));
       // filter spots by category
       q = query(q, where("category", "array-contains", category));
       const snapshot = await getDocs(q);
@@ -123,13 +122,22 @@ export default {
         else if (category == "tech"){
           return this.techSpotList.push({ id: doc.id, ...doc.data() });
         }
-
       });
     },
+
+    getCampus() {
+      // filter array into object based on campus (arrow function)
+      this.campus = this.locations.filter(obj => obj.name === this.$route.params.campus)[0];
+      /* 
+      this.campus = this.locations.filter(function (obj) { 
+        return obj.name === this.$route.params.campus; 
+      })[0]; */
+    }
   
   },
   mounted() {
     this.getSpots();
+    this.getCampus();
   }
 };
 </script>
